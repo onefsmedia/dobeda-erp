@@ -1,0 +1,57 @@
+# Simplified Pod-based compose file for Dobeda ERP
+# This approach uses shared network without complex pod infrastructure
+
+version: '3.8'
+
+services:
+  # Database service
+  db:
+    image: mariadb:latest
+    container_name: dobeda-pod-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword123
+      MYSQL_DATABASE: gasepshalomdb
+      MYSQL_USER: gasepshalomadmin
+      MYSQL_PASSWORD: Nyuyforam@2024
+    volumes:
+      - dobeda_pod_data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - dobeda-pod-net
+
+  # PHP service
+  php:
+    build: ./php
+    container_name: dobeda-pod-php
+    volumes:
+      - ./public:/var/www/public
+    environment:
+      - PHP_INI_SCAN_DIR=/usr/local/etc/php/conf.d:/usr/local/etc/php/custom.d
+    restart: unless-stopped
+    depends_on:
+      - db
+    networks:
+      - dobeda-pod-net
+
+  # Nginx service
+  nginx:
+    image: nginx:latest
+    container_name: dobeda-pod-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/public:ro
+      - ./nginx-pod.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+    depends_on:
+      - php
+    networks:
+      - dobeda-pod-net
+
+volumes:
+  dobeda_pod_data:
+    driver: local
+
+networks:
+  dobeda-pod-net:
+    driver: bridge
