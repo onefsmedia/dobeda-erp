@@ -1,0 +1,36 @@
+
+version: '3.8'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+     - ./nginx.conf/nginx.conf:/etc/nginx/nginx.conf
+     - ./default.conf:/etc/nginx/conf.d/default.conf
+     - ./public:/var/www/public
+    depends_on:
+      - php
+
+  php:
+    build: ./php
+    volumes:
+      - ./public:/var/www/public
+      - .:/var/www
+    working_dir: /var/www
+
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: StartUpGS@00237
+      MYSQL_DATABASE: gasepshalomdb
+      MYSQL_USER: gasepshalomadmin
+      MYSQL_PASSWORD: Nyuyforam@2024
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

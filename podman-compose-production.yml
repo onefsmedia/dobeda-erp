@@ -1,0 +1,46 @@
+# Production podman-compose.yml for VPS
+# Use this version on your VPS for production deployment
+
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"  # Use port 80 for production
+      # - "443:443"  # Uncomment for HTTPS
+    volumes:
+      - ./public:/var/www/public:ro
+      - ./nginx.conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - php
+    restart: unless-stopped
+
+  php:
+    image: localhost/erpv3_php:latest
+    # Note: Image will be loaded from exported tar file
+    volumes:
+      - ./public:/var/www/public
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      - PHP_INI_SCAN_DIR=/usr/local/etc/php/conf.d:/usr/local/etc/php/custom.d
+
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword123
+      MYSQL_DATABASE: gasepshalomdb
+      MYSQL_USER: gasepshalomadmin
+      MYSQL_PASSWORD: Nyuyforam@2024
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    restart: unless-stopped
+    # Uncomment for external access if needed
+    # ports:
+    #   - "3306:3306"
+
+volumes:
+  mariadb_data:
+    driver: local
