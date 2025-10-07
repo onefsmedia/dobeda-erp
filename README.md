@@ -19,7 +19,7 @@ A fully containerized deployment of Perfex CRM using Podman/Docker with Nginx, P
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/perfex-crm-containerized.git
+git clone https://github.com/onefsmedia/perfex-crm-containerized.git
 cd perfex-crm-containerized
 ```
 

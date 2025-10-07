@@ -45,9 +45,17 @@ echo "📥 Pulling required images..."
 podman pull nginx:latest
 podman pull mariadb:latest
 
+# Create app-config.php from sample
+echo "📋 Setting up configuration..."
+if [ ! -f "public/application/config/app-config.php" ]; then
+    cp public/application/config/app-config-sample.php public/application/config/app-config.php
+    echo "⚠️  Please edit public/application/config/app-config.php with your database credentials"
+    echo "⚠️  Update base_url to match your VPS domain/IP"
+fi
+
 # Start services
 echo "🚀 Starting services..."
-podman-compose up -d
+podman-compose -f podman-compose-production.yml up -d
 
 echo "✅ Deployment complete!"
 echo "🌐 Access your CRM at: http://YOUR-VPS-IP"
