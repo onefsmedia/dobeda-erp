@@ -3,17 +3,17 @@
 # GitHub-based VPS deployment script
 # Usage: ./deploy-from-github.sh [git-repo-url] [vps-user@host] [vps-path]
 
-REPO_URL=${1:-"https://github.com/onefsmedia/perfex-crm-containerized.git"}
+REPO_URL=${1:-"https://github.com/onefsmedia/dobeda-erp.git"}
 VPS_HOST=$2
-VPS_PATH=${3:-"/opt/erpv3"}
+VPS_PATH=${3:-"/opt/dobeda-erp"}
 
 if [ -z "$VPS_HOST" ]; then
     echo "Usage: $0 [git-repo-url] vps-user@host [vps-path]"
-    echo "Example: $0 https://github.com/user/repo.git root@192.168.1.100 /opt/erpv3"
+    echo "Example: $0 https://github.com/user/repo.git root@192.168.1.100 /opt/dobeda-erp"
     exit 1
 fi
 
-echo "🚀 Deploying Perfex CRM from GitHub to VPS..."
+echo "🚀 Deploying Dobeda ERP from GitHub to VPS..."
 echo "📋 Repository: $REPO_URL"
 echo "🖥️  VPS: $VPS_HOST"
 echo "📁 Path: $VPS_PATH"
@@ -30,7 +30,7 @@ scp erpv3_php.tar $VPS_HOST:$VPS_PATH/
 cat > vps-setup.sh << EOF
 #!/bin/bash
 
-echo "🔧 Setting up Perfex CRM from GitHub..."
+echo "🔧 Setting up Dobeda ERP from GitHub..."
 
 # Clone repository
 echo "📥 Cloning repository..."

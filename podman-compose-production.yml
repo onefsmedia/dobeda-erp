@@ -1,5 +1,5 @@
 # Production podman-compose.yml for VPS
-# Use this version on your VPS for production deployment
+# Dobeda ERP containerized deployment
 
 version: '3.8'
 
@@ -35,12 +35,12 @@ services:
       MYSQL_USER: gasepshalomadmin
       MYSQL_PASSWORD: Nyuyforam@2024
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - dobeda_erp_data:/var/lib/mysql
     restart: unless-stopped
     # Uncomment for external access if needed
     # ports:
     #   - "3306:3306"
 
 volumes:
-  mariadb_data:
+  dobeda_erp_data:
     driver: local

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Deployment script for Perfex CRM to VPS
+# Deployment script for Dobeda ERP to VPS
 # Usage: ./deploy-to-vps.sh user@vps-ip /path/on/vps
 
 VPS_USER_HOST=$1
@@ -8,7 +8,7 @@ VPS_PATH=$2
 
 if [ -z "$VPS_USER_HOST" ] || [ -z "$VPS_PATH" ]; then
     echo "Usage: $0 user@vps-ip /path/on/vps"
-    echo "Example: $0 root@192.168.1.100 /opt/erpv3"
+    echo "Example: $0 root@192.168.1.100 /opt/dobeda-erp"
     exit 1
 fi
 
@@ -34,7 +34,7 @@ scp -r deploy-package/* $VPS_USER_HOST:$VPS_PATH/
 # Step 4: Create setup script for VPS
 cat > deploy-package/setup-on-vps.sh << 'EOF'
 #!/bin/bash
-echo "🔧 Setting up Perfex CRM on VPS..."
+echo "🔧 Setting up Dobeda ERP on VPS..."
 
 # Load custom PHP image
 echo "📥 Loading PHP image..."

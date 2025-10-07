@@ -1,6 +1,6 @@
-# Perfex CRM - Containerized Deployment
+# Dobeda ERP - Containerized Deployment
 
-A fully containerized deployment of Perfex CRM using Podman/Docker with Nginx, PHP-FPM, and MariaDB.
+A fully containerized deployment of Dobeda ERP using Podman/Docker with Nginx, PHP-FPM, and MariaDB.
 
 ## 🚀 Features
 
@@ -19,8 +19,8 @@ A fully containerized deployment of Perfex CRM using Podman/Docker with Nginx, P
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/onefsmedia/perfex-crm-containerized.git
-cd perfex-crm-containerized
+git clone https://github.com/onefsmedia/dobeda-erp.git
+cd dobeda-erp
 ```
 
 ### 2. Configuration
@@ -67,11 +67,11 @@ The custom PHP image includes:
 ### Option 1: Automated Deployment Script
 ```bash
 # Deploy to VPS
-./deploy-to-vps.sh user@your-vps-ip /opt/erpv3
+./deploy-to-vps.sh user@your-vps-ip /opt/dobeda-erp
 
 # On VPS, run setup
 ssh user@your-vps-ip
-cd /opt/erpv3
+cd /opt/dobeda-erp
 ./setup-on-vps.sh
 ```
 
@@ -81,7 +81,7 @@ cd /opt/erpv3
 podman save localhost/erpv3_php:latest -o erpv3_php.tar
 
 # 2. Transfer files to VPS
-scp -r . user@vps-ip:/opt/erpv3/
+scp -r . user@vps-ip:/opt/dobeda-erp/
 
 # 3. On VPS - Load image and start
 podman load -i erpv3_php.tar
@@ -135,10 +135,10 @@ podman-compose logs php
 podman-compose logs db
 
 # Access PHP container
-podman exec -it erpv3_php_1 bash
+podman exec -it dobeda-erp_php_1 bash
 
 # Database backup
-podman exec erpv3_db_1 mysqldump -u root -p gasepshalomdb > backup.sql
+podman exec dobeda-erp_db_1 mysqldump -u root -p gasepshalomdb > backup.sql
 ```
 
 ## 🔄 Updates
@@ -151,7 +151,7 @@ To update the application:
 
 ## 📝 License
 
-This project contains Perfex CRM, which is a commercial product. Please ensure you have proper licensing for Perfex CRM before using this containerized setup.
+This project contains Dobeda ERP software. Please ensure you have proper licensing before using this containerized setup.
 
 ## 🤝 Contributing
 
@@ -165,4 +165,4 @@ This project contains Perfex CRM, which is a commercial product. Please ensure y
 
 For deployment issues related to this containerized setup, please open an issue in this repository.
 
-For Perfex CRM specific questions, refer to the official Perfex documentation.
+For Dobeda ERP specific questions, refer to the official documentation.
